@@ -1,0 +1,127 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{xcolor}
+%\usepackage{sagetex}
+
+\usepackage{euler}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{unicode-math}
+
+
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+
+\setlength\parindent{0em}
+\setlength\parskip{0.618em}
+\usepackage[a4paper,lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\setmainfont[Mapping=tex-text]{Helvetica Neue LT Std 45 Light}
+
+\newcommand\N{\mathbb{N}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\R{\mathbb{R}}
+\newcommand\C{\mathbb{C}}
+\newcommand\A{\mathbb{A}}
+
+\usepackage{soul}
+\begin{document}
+
+\begin{center}
+  146B --- Fourier Series
+\end{center}\vspace{1.618em}
+
+Let $f:[-L,L]\rightarrow \R$.
+
+$$f \sim \frac{a_0}{2} + \sum_{n=1}^\infty [a_n \cos(\frac{n\pi x}{L}) +
+b_n sin(\frac{n\pi x}{L})]$$
+
+$$a_n = \frac{1}{L} \int_{-L}^L f(x)\cos(\frac{n\pi x}{L}) dx\enskip,
+n\in \N_0$$
+
+$$b_n = \frac{1}{L} \int_{-L}^L f(x)\sin(\frac{n\pi x}{L}) dx\enkskip,
+n\in \N$$
+
+$$1^\circ f\text{ is odd: } a_n = 0; 2^\circ f\text{ is even: } b_n = 0$$
+
+Convergence
+
+$f$ is said to be piecewise continuous on $[a,b]$, if the interval is
+divided into a finite number of subintervals,
+$(x_0,x_1),(x_1,x_2),\cdots,(x_{n-1},x_n)$, $a = x_0$, $b = x_n$. So
+that,
+
+$$1^\circ f\text{ is continuous on} (x_{i-1}, x_i),\text{ for } i =
+1,2,\dots,n$$
+$$2^\circ f\text{ has finite (one-sided) limit at the endpoints }
+x_i,\text{ for } i = 1,2,\dots, n$$
+
+Ass. $f$ and its derivative $f^\prime$ are piecewise continuous on
+$[-L,L].$ $f$ has a period of $2L$. Then $f$ has a Fourier expansion
+$$f \sim \frac{a_0}{2} + \sum_{n=1}^\infty [a_n \cos(\frac{n\pi x}{L}) +
+b_n \sin(\frac{n\pi x}{L})]$$
+The Fourier series converges to $f(x)$ where $f$ is continuous, and
+converges to,$$\frac{f(x+)+f(x-)}{2}$$ at points where $f$ is
+discontinuous. The value of $f$ at the discontinuities need not be the
+average of the left and right hand limits.
+
+The heat equation $$\begin{cases} u_t = u_{xx}, 0<x<L\text{ and }t>0\\
+  u(0,t)= u(L,t) = 0 \\ u(x,0) = f(x)\end{cases}$$
+
+Separation of variables, for the eigenvalues $$\lambda_n =
+(\frac{n\pi}{L})^2,$$ with corresponding
+eigenfunctions $$X_n(x) = \sin(\frac{n\pi}{L}x),\text{ and }T_n(x) =
+e^{-(\frac{n\pi}{L})^2 t}$$.
+
+And $u_n(x,t)= X_n(x)T_n(x) =
+sin(\frac{n\pi}{L}x)e^{-(\frac{n\pi}{L})^2 t}$ for $n\in \N$.
+
+Then the general solution is $$u(x,t) = \sum_{n=1}^\infty C_n
+\sin(\frac{n\pi}{L}x)e^{-(\frac{n\pi}{L})^2 t}$$
+\newpage
+
+We can see that the last condition gives us that,
+$$u(x,0) = \sum_{n=1}^\infty C_n
+\sin(\frac{n\pi}{L}x)e^{-(\frac{n\pi}{L})^2 0} = \sum_{n=1}^\infty c_n
+\sin(\frac{n\pi}{L}x) = f(x)$$
+
+We need to extend $f:[0,L]\rightarrow \R$
+$[-L,L]$ to a function $F:[-L,L]\rightarrow \R$ to get a Fourier expansion of $F$.
+
+And we need the extension to be an odd function to get a Fourier expansion involving only
+$\sin(\frac{n\pi}{L}x)$.
+
+Then define $F:[-L,L]\rightarrow \R; F(x) = \begin{cases} f(x)\quad\enskip \text{, for
+  }\quad\enskip 0<x<L\\ -f(-x)\text{, for }-L<x<0\end{cases}$
+
+$$b_n = \frac{1}{L}\int_{-L}^L F(x)\sin(\frac{n\pi}{L}x)dx =
+\frac{2}{L}\int_{0}^LF(x)\sin(\frac{n\pi}{L}x)dx\enskip,\quad \text{ since
+}F(x)\sin(\frac{n\pi}{L}x)\text{ is even.}$$
+
+Notice $F = f$ on $[0,L]$ and $c_n$ corresponds to $b_n$ so,
+
+$$c_n = \frac{2}{L} \int_0^L f(x) \sin(\frac{n\pi}{L}x) dx.$$
+
+
+Now to consider general classes of solutions of partial differential
+equations, we need to see if the first two conditions determine a
+series of $\cos(\frac{n\pi}{L}x)$. So, we need to consider the even
+extension $F$ of $f$,
+
+Define $F:[-L,L]\rightarrow \R; F(x) = \begin{cases} f(x)\quad\enskip \text{, for
+  }\quad\enskip 0<x<L\\f(-x)\enskip\text{ , for }-L<x<0\end{cases}$
+
+Similarly, $a_n = \frac{2}{L} \int_{0}^L f(x)\cos(\frac{n\pi}{L}x)dx.$
+This is called the cosine expansion, and the $c_n$ are called the sine
+expansion. Also called the half-range expansions for
+$f:[0,L]\rightarrow \R$, corresponding to sine and cosine series.
+
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
